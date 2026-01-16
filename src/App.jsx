@@ -3,15 +3,60 @@ import axios from "axios";
 import "./App.css";
 
 // Modern "Nano Banana" Styled Icons
-const IconSparkle = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="nano-icon">
-    <path d="M12 3L14.5 9L21 11.5L14.5 14L12 21L9.5 14L3 11.5L9.5 9L12 3Z" fill="url(#banana-grad)" stroke="url(#purple-grad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+const IconSparkle = ({
+  size = 7,
+  className = "",
+}) => (
+  <svg
+    width={size}
+    height={size * 2}
+    viewBox="0 0 128 256"
+    xmlns="http://www.w3.org/2000/svg"
+    className={`nano-icon ${className}`}
+    aria-hidden="true"
+  >
     <defs>
-      <linearGradient id="banana-grad" x1="0" y1="0" x2="24" y2="24">
+      <linearGradient
+        id="sparkle-grad"
+        x1="0"
+        y1="0"
+        x2="128"
+        y2="256"
+        gradientUnits="userSpaceOnUse"
+      >
         <stop offset="0%" stopColor="#fbbf24" />
         <stop offset="100%" stopColor="#f59e0b" />
       </linearGradient>
-      <linearGradient id="purple-grad" x1="0" y1="0" x2="24" y2="24">
+    </defs>
+
+    <path
+      d="M72 0
+         L20 108
+         H58
+         L32 184
+         H72
+         L40 256
+         L108 140
+         H70
+         L96 64
+         H56
+         Z"
+      fill="url(#sparkle-grad)"
+      stroke="#fbbf24"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+
+const IconLink = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="nano-icon">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="url(#link-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="url(#link-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <defs>
+      <linearGradient id="link-grad" x1="0" y1="0" x2="24" y2="24">
         <stop offset="0%" stopColor="#818cf8" />
         <stop offset="100%" stopColor="#a855f7" />
       </linearGradient>
@@ -19,16 +64,15 @@ const IconSparkle = () => (
   </svg>
 );
 
-const IconLink = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="nano-icon">
-    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="url(#purple-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="url(#purple-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
 const IconChart = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="nano-icon">
-    <path d="M18 20V10M12 20V4M6 20V14" stroke="url(#purple-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M18 20V10M12 20V4M6 20V14" stroke="url(#chart-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <defs>
+      <linearGradient id="chart-grad" x1="0" y1="0" x2="24" y2="24">
+        <stop offset="0%" stopColor="#818cf8" />
+        <stop offset="100%" stopColor="#a855f7" />
+      </linearGradient>
+    </defs>
   </svg>
 );
 
@@ -47,8 +91,32 @@ const IconTag = () => (
 );
 
 const IconBolt = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="nano-icon">
-    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#fbbf24" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="nano-icon">
+    {/* Outer Glow Path */}
+    <path
+      d="M13 2
+         L5 13
+         H11
+         L10 22
+         L19 11
+         H13
+         Z"
+      stroke="#6366f1"   // indigo / bluish (matches IconCopy & IconLock)
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <defs>
+      <linearGradient id="bolt-gradient" x1="4" y1="3" x2="20" y2="21">
+        <stop offset="0%" stopColor="#fbbf24" />
+        <stop offset="50%" stopColor="#f59e0b" />
+        <stop offset="100%" stopColor="#ea580c" />
+      </linearGradient>
+      <linearGradient id="bolt-glow" x1="4" y1="2" x2="20" y2="22">
+        <stop offset="0%" stopColor="rgba(251, 191, 36, 0.8)" />
+        <stop offset="100%" stopColor="rgba(234, 88, 12, 0.4)" />
+      </linearGradient>
+    </defs>
   </svg>
 );
 
@@ -99,6 +167,12 @@ const IconLock = () => (
 const IconTwitterX = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const IconGitHub = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
   </svg>
 );
 
@@ -182,7 +256,7 @@ function App() {
     } catch (err) {
       console.error("Shortening failed:", err);
       const msg = err.response?.data?.message || err.message || "Server connection failed";
-      alert(`⚠️ ${msg}`);
+      alert(`Status: ${msg}`);
     } finally {
       setLoading(false);
     }
@@ -505,9 +579,9 @@ function App() {
         <div className="footer-bottom">
           <p>© 2026 TinyURL Pro. All rights reserved.</p>
           <div className="social-links">
-            <a href="#twitter"><IconTwitterX /></a>
-            <a href="#linkedin"><IconLinkedIn /></a>
-            <a href="#github"><IconBolt /></a>
+            <a href="#twitter" title="Twitter"><IconTwitterX /></a>
+            <a href="#linkedin" title="LinkedIn"><IconLinkedIn /></a>
+            <a href="#github" title="GitHub"><IconGitHub /></a>
           </div>
         </div>
       </footer>
